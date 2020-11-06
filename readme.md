@@ -1,7 +1,7 @@
 # AWS SQS SNS Subscription Queue
 
-[![Downloads](https://img.shields.io/packagist/dt/joblocal/laravel-sqs-sns-subscription-queue.svg)](https://packagist.org/packages/joblocal/laravel-sqs-sns-subscription-queue)
-[![Version](https://img.shields.io/packagist/v/joblocal/laravel-sqs-sns-subscription-queue.svg)](https://packagist.org/packages/joblocal/laravel-sqs-sns-subscription-queue)
+[![Downloads](https://img.shields.io/packagist/dt/ervinomueller/laravel-sqs-sns-subscription-queue.svg)](https://packagist.org/packages/ervinomueller/laravel-sqs-sns-subscription-queue)
+[![Version](https://img.shields.io/packagist/v/ervinomueller/laravel-sqs-sns-subscription-queue.svg)](https://packagist.org/packages/ervinomueller/laravel-sqs-sns-subscription-queue)
 
 A simple extension to the [Illuminate/Queue](https://github.com/illuminate/queue) queue system used in [Laravel](https://laravel.com) and [Lumen](https://lumen.laravel.com/).
 
@@ -11,17 +11,23 @@ This is especially useful in a miroservice architecture where multiple services 
 
 Understand that this package will not handle publishing to SNS, please use the [AWS SDK](https://aws.amazon.com/sdk-for-php/) to publish an event to SNS.
 
-
 ## Requirements
 
 -   Laravel (tested with version 5.8)
 -   or Lumen (tested with version 5.8)
 
+## Installation
+
+The best way to install laravel-sqs-sns-subscription is by using [Composer](http://getcomposer.org/).
+
+To install the most recent version:
+```sh
+php composer.phar require ervinomueller/laravel-sqs-sns-subscription-queue
+```
 
 ## Usage
 
 Add the LaravelSqsSnsSubscriptionQueue ServiceProvider to your application.
-
 
 ### Laravel
 [Registering Service Providers in Laravel](https://laravel.com/docs/5.6/providers#registering-providers)
@@ -58,6 +64,8 @@ You'll need to configure the queue connection in your config/queue.php
         'TopicArn:123' => 'App\\Jobs\\YourJob',
         // to specify which job class should handle the job
     ],
+    //optional - you can override default job when no job are found on routes array above
+    'default-job' => 'App\\Jobs\\YourDefaultJob',
   ],
 ],
 ```
@@ -120,14 +128,4 @@ Illuminate\Queue\Jobs\SqsJob requires the following signature:
     "command": "...",
   }
 }
-```
-
-
-## Installation
-
-The best way to install laravel-sqs-sns-subscription is by using [Composer](http://getcomposer.org/).
-
-To install the most recent version:
-```sh
-php composer.phar require joblocal/laravel-sqs-sns-subscription-queue
 ```
