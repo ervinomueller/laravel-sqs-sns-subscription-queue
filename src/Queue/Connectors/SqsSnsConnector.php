@@ -3,9 +3,9 @@
 namespace Joblocal\LaravelSqsSnsSubscriptionQueue\Queue\Connectors;
 
 use Aws\Sqs\SqsClient;
+use Illuminate\Contracts\Queue\Queue;
 use Illuminate\Queue\Connectors\SqsConnector;
 use Illuminate\Support\Arr;
-
 use Joblocal\LaravelSqsSnsSubscriptionQueue\Queue\SqsSnsQueue;
 
 class SqsSnsConnector extends SqsConnector
@@ -14,7 +14,7 @@ class SqsSnsConnector extends SqsConnector
      * Establish a queue connection.
      *
      * @param array $config
-     * @return \Illuminate\Contracts\Queue\Queue
+     * @return Queue
      */
     public function connect(array $config)
     {

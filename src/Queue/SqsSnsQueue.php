@@ -3,8 +3,8 @@
 namespace Joblocal\LaravelSqsSnsSubscriptionQueue\Queue;
 
 use Aws\Sqs\SqsClient;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Queue\SqsQueue;
-
 use Joblocal\LaravelSqsSnsSubscriptionQueue\Queue\Jobs\SqsSnsJob;
 
 class SqsSnsQueue extends SqsQueue
@@ -19,8 +19,8 @@ class SqsSnsQueue extends SqsQueue
     /**
      * Create a new Amazon SQS SNS subscription queue instance
      *
-     * @param \Aws\Sqs\SqsClient $sqs
-     * @param string $default
+     * @param SqsClient $sqs
+     * @param mixed $default
      * @param string $prefix
      * @param array $routes
      */
@@ -34,15 +34,16 @@ class SqsSnsQueue extends SqsQueue
     /**
      * Pop the next job off of the queue.
      *
-     * @param string $queue
-     * @return \Joblocal\LaravelSqsSnsSubscriptionQueue\Queue\Jobs\SqsSnsJob
+     * @param mixed $queue
+     * @return SqsSnsJob|void
+     * @throws BindingResolutionException
      */
     public function pop($queue = null)
     {
         $queue = $this->getQueue($queue);
 
         $response = $this->sqs->receiveMessage([
-            'QueueUrl' => $queue,
+            'QueueUrl'       => $queue,
             'AttributeNames' => ['ApproximateReceiveCount'],
         ]);
 

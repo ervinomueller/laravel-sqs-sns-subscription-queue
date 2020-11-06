@@ -3,7 +3,6 @@
 namespace Joblocal\LaravelSqsSnsSubscriptionQueue;
 
 use Illuminate\Support\ServiceProvider;
-
 use Joblocal\LaravelSqsSnsSubscriptionQueue\Queue\Connectors\SqsSnsConnector;
 
 class SqsSnsServiceProvider extends ServiceProvider
